@@ -1,0 +1,32 @@
+description: "JudgeBench - Promptfoo closedqa"
+
+providers:
+  - id: http
+    config:
+      url: http://localhost:8000/v1/chat/completions
+      method: POST
+      body:
+        model: mock-judge-target
+        messages:
+          - role: user
+            content: "<<JUDGEBENCH_ID:{{id}}>>\n{{user_prompt}}"
+  - id: "openai:chat:x-ai/grok-4.1-fast"
+    label: openrouter-judge
+    config:
+      apiKeyEnvar: LLM_JUDGE_API_KEY
+      apiBaseUrl: https://openrouter.ai/api/v1
+      temperature: 0
+      max_tokens: 256
+
+defaultTest:
+  options:
+    provider: "openai:chat:x-ai/grok-4.1-fast"
+
+tests: file://benchmark/cases.jsonl
+
+prompts:
+  - "{{user_prompt}}"
+
+assert:
+  - type: model-graded-closedqa
+    value: "{{reference_answer}}"

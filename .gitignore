@@ -1,0 +1,36 @@
+# Secrets — никогда в git
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Сырые прогоны (большие JSON/логи, ключи в env)
+outputs/
+
+# Промежуточные результаты (пересобираются из outputs/)
+results/normalized_results.csv
+
+# Локальные артефакты IDE / OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Matplotlib cache (если появится)
+.mplconfig/

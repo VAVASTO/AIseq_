@@ -1,0 +1,22 @@
+model:
+  provider: openai
+  model: mock-judge-target
+  api_base: http://localhost:8000/v1
+  api_key: dummy
+
+evaluator:
+  type: wildguard
+
+dataset:
+  path: benchmark/cases.jsonl
+  prompt_field: user_prompt
+
+output:
+  path: outputs/hivetrace/results.csv
+  format: csv
+
+attacks:
+  - roleplay
+  - persuasion
+  - token_smuggling
+  - context_switching
